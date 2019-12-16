@@ -2,10 +2,8 @@ package com.github.shiraji.ccch.menu
 
 import com.github.shiraji.ccch.domain.CommonCustomChannel
 import com.intellij.ide.plugins.PluginHostsConfigurable
-import com.intellij.openapi.options.Configurable
 import com.intellij.openapi.options.SearchableConfigurable
 import com.intellij.openapi.options.ShowSettingsUtil
-import com.intellij.openapi.project.Project
 import com.intellij.openapi.updateSettings.impl.UpdateSettings
 import com.intellij.ui.components.labels.SwingActionLink
 import java.awt.event.ActionEvent
@@ -66,17 +64,29 @@ class CcchMenu : SearchableConfigurable {
     fun createUIComponents() {
         actionLink = SwingActionLink(object : AbstractAction("Open custom release channel dialog") {
             override fun actionPerformed(e: ActionEvent?) {
-                ShowSettingsUtil.getInstance().editConfigurable(root, PluginHostsConfigurable())
+                if (ShowSettingsUtil.getInstance().editConfigurable(root, PluginHostsConfigurable())) {
+                    syncUI()
+                }
             }
         })
     }
 
     override fun createComponent(): JComponent? {
+        syncUI()
+        return root
+    }
+
+    private fun syncUI() {
         val list = UpdateSettings.getInstance().storedPluginHosts
         eapCheckbox?.let { it.isSelected = list.contains(CommonCustomChannel.EAP.url) }
         alphaCheckbox?.let { it.isSelected = list.contains(CommonCustomChannel.ALPHA.url) }
         betaCheckbox?.let { it.isSelected = list.contains(CommonCustomChannel.BETA.url) }
         nightlyCheckbox?.let { it.isSelected = list.contains(CommonCustomChannel.NIGHTLY.url) }
-        return root
+        actionLink?.let { it.isEnabled = true }
+    }
+
+    override fun reset() {
+        super.reset()
+        syncUI()
     }
 }
