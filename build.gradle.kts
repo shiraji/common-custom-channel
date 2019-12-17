@@ -26,19 +26,64 @@ plugins {
     id("org.jetbrains.intellij") version "0.4.15"
 }
 
-group = "com.github.shiraji"
-version = "1.0-SNAPSHOT"
+group = "com.github.shiraji.ccch"
+version = System.getProperty("VERSION") ?: "0.0.1"
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version = "2019.2.3"
+    version = "2019.2"
 }
 
 val patchPluginXml: PatchPluginXmlTask by tasks
 patchPluginXml {
-    changeNotes("""
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>""")
+    changeNotes(project.file("LATEST.txt").readText())
+    sinceBuild("192.5728")
+    untilBuild("193")
+}
+
+val publishPlugin: PublishTask by tasks
+publishPlugin {
+    token(System.getenv("HUB_TOKEN"))
+    channels(System.getProperty("CHANNELS") ?: "beta")
+}
+
+configurations {
+    create("ktlint")
+
+    dependencies {
+        add("ktlint", "com.github.shyiko:ktlint:0.30.0")
+    }
+}
+
+tasks.register("ktlintCheck", JavaExec::class) {
+    description = "Check Kotlin code style."
+    classpath = configurations["ktlint"]
+    main = "com.github.shyiko.ktlint.Main"
+    args("src/**/*.kt")
+}
+
+tasks.register("ktlintFormat", JavaExec::class) {
+    description = "Fix Kotlin code style deviations."
+    classpath = configurations["ktlint"]
+    main = "com.github.shyiko.ktlint.Main"
+    args("-F", "src/**/*.kt")
+}
+
+tasks.register("resolveDependencies") {
+    doLast {
+        project.rootProject.allprojects.forEach {subProject ->
+            subProject.buildscript.configurations.forEach {configuration ->
+                if (configuration.isCanBeResolved) {
+                    configuration.resolve()
+                }
+            }
+            subProject.configurations.forEach {configuration ->
+                if (configuration.isCanBeResolved) {
+                    configuration.resolve()
+                }
+            }
+        }
+    }
 }
 
 inline operator fun <T : Task> T.invoke(a: T.() -> Unit): T = apply(a)

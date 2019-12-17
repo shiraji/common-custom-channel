@@ -1,21 +1,21 @@
 <idea-plugin>
     <id>com.github.shiraji.ccch</id>
     <name>Common Custom Channel</name>
-    <vendor email="isogai.shiraji@gmail.com" url="http://www.yourcompany.com">YourCompany</vendor>
+    <vendor email="isogai.shiraji@gmail.com" url="https://github.com/shiraji">Shiraji</vendor>
 
     <description><![CDATA[
-    Enter short description for your plugin here.<br>
-    <em>most HTML tags may be used</em>
+    How many times you google "intellij plugin beta url" and find this link?<br/>
+    <img src="https://raw.githubusercontent.com/shiraji/common-custom-channel/master/website/images/url-list.png"/><br/>
+
+    This plugin helps you to set/unset common custom repository channels, super easily. All you need to do is select and apply!<br/>
+    <img src="https://raw.githubusercontent.com/shiraji/common-custom-channel/master/website/images/settings.gif"/><br/>
+
     ]]></description>
 
-    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
-         on how to target different products -->
     <depends>com.intellij.modules.lang</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationConfigurable instance="com.github.shiraji.ccch.menu.CcchMenu" />
     </extensions>
 
-    <actions>
-    </actions>
 </idea-plugin>

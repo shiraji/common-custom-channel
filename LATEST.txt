@@ -1,0 +1,5 @@
+<p>1.0.0</p>
+<ul>
+  <li>Initial release</li>
+</ul>
+<p>Older version changes are listed on <a href="https://github.com/shiraji/common-custom-channel/blob/master/CHANGELOG.md">CHANGELOG.md</a></p>
