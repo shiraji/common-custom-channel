@@ -2,16 +2,12 @@ package com.github.shiraji.ccch.menu
 
 import com.github.shiraji.ccch.domain.CommonCustomChannel
 import com.intellij.ide.plugins.PluginHostsConfigurable
-import com.intellij.ide.plugins.RepositoryHelper
 import com.intellij.openapi.options.SearchableConfigurable
 import com.intellij.openapi.options.ShowSettingsUtil
 import com.intellij.openapi.updateSettings.impl.UpdateSettings
 import com.intellij.ui.components.labels.SwingActionLink
 import java.awt.event.ActionEvent
-import javax.swing.AbstractAction
-import javax.swing.JCheckBox
-import javax.swing.JComponent
-import javax.swing.JPanel
+import javax.swing.*
 
 
 class CcchMenu : SearchableConfigurable {
@@ -21,6 +17,7 @@ class CcchMenu : SearchableConfigurable {
     private var nightlyCheckbox: JCheckBox? = null
     private var root: JPanel? = null
     private var actionLink: SwingActionLink? = null
+    private var waringLabel: JLabel? = null
 
     override fun isModified(): Boolean {
         actionLink?.let { it.isEnabled = false }
@@ -55,6 +52,7 @@ class CcchMenu : SearchableConfigurable {
         betaCheckbox?.let { applyChannel(set, it, CommonCustomChannel.BETA.url) }
         nightlyCheckbox?.let { applyChannel(set, it, CommonCustomChannel.NIGHTLY.url) }
         list.addAll(set)
+        waringLabel?.isVisible = true
     }
 
     private fun applyChannel(urls: MutableSet<String>, checkbox: JCheckBox, url: String) {
