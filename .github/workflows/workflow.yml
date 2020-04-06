@@ -47,8 +47,9 @@ jobs:
         run: echo ::set-output name=version::${github_ref/refs\/tags\//}
       - name: Release
         env:
+          TAG_NAME: ${{ github.ref }}
           HUB_TOKEN: ${{ secrets.HUB_TOKEN }}
-        run: ./gradlew buildPlugin publishPlugin -DVERSION=${CIRCLE_TAG#beta-} -DCHANNELS=beta
+        run: ./gradlew buildPlugin publishPlugin -DVERSION=${TAG_NAME#refs/tags/beta-} -DCHANNELS=beta
 
   release:
     needs: build-and-test
@@ -69,5 +70,6 @@ jobs:
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
       - name: Release
         env:
+          TAG_NAME: ${{ github.ref }}
           HUB_TOKEN: ${{ secrets.HUB_TOKEN }}
-        run: ./gradlew buildPlugin publishPlugin -DVERSION=${CIRCLE_TAG#release-} -DCHANNELS=default
+        run: ./gradlew buildPlugin publishPlugin -DVERSION=${TAG_NAME#refs/tags/release-} -DCHANNELS=default
