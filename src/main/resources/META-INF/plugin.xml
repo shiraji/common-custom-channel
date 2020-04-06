@@ -1,4 +1,4 @@
-<idea-plugin>
+<idea-plugin url="https://plugins.jetbrains.com/plugin/14084-common-custom-channel">
     <id>com.github.shiraji.ccch</id>
     <name>Common Custom Channel</name>
     <vendor email="isogai.shiraji@gmail.com" url="https://github.com/shiraji">Shiraji</vendor>
