@@ -15,6 +15,8 @@ This plugin helps you to set/unset common custom repository channels, super easi
 * Select/Unselect whatever you want to use as custom release channels
 * Click OK
 
+In order to refresh plugin search results, please reopen preferences dialog
+
 ## Limitation
 
 Currently, I don't have an idea that how to refresh plugin search result after changing release channel using this menu.

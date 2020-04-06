@@ -10,6 +10,7 @@
     This plugin helps you to set/unset common custom repository channels, super easily. All you need to do is select and apply!<br/>
     <img src="https://raw.githubusercontent.com/shiraji/common-custom-channel/master/website/images/settings.gif"/><br/>
 
+    In order to refresh plugin search results, please reopen preferences dialog
     ]]></description>
 
     <depends>com.intellij.modules.lang</depends>
