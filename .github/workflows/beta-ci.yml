@@ -30,4 +30,4 @@ jobs:
     - name: Release
       env:
         HUB_TOKEN: ${{ secrets.HUB_TOKEN }}
-      run: ./gradlew buildPlugin publishPlugin -DVERSION=${CIRCLE_TAG#beta-} -DCHANNELS=beta --dry-run
+      run: ./gradlew buildPlugin publishPlugin -DVERSION=${CIRCLE_TAG#beta-} -DCHANNELS=beta
