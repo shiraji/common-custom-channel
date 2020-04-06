@@ -24,10 +24,34 @@ repositories {
 plugins {
     id("org.jetbrains.kotlin.jvm")
     id("org.jetbrains.intellij") version "0.4.15"
+    id("jacoco")
 }
 
 group = "com.github.shiraji.ccch"
 version = System.getProperty("VERSION") ?: "0.0.1"
+
+val test by tasks.getting(Test::class) {
+    useJUnitPlatform()
+    maxHeapSize = "3g"
+}
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions {
+        jvmTarget = "1.8"
+        freeCompilerArgs = listOf("-Xjsr305=strict")
+    }
+}
+
+jacoco {
+    toolVersion = "0.8.2"
+}
+
+val jacocoTestReport by tasks.existing(JacocoReport::class) {
+    reports {
+        xml.isEnabled = true
+        html.isEnabled = true
+    }
+}
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
