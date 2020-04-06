@@ -7,8 +7,11 @@ import com.intellij.openapi.options.ShowSettingsUtil
 import com.intellij.openapi.updateSettings.impl.UpdateSettings
 import com.intellij.ui.components.labels.SwingActionLink
 import java.awt.event.ActionEvent
-import javax.swing.*
-
+import javax.swing.AbstractAction
+import javax.swing.JCheckBox
+import javax.swing.JLabel
+import javax.swing.JPanel
+import javax.swing.JComponent
 
 class CcchMenu : SearchableConfigurable {
     private var eapCheckbox: JCheckBox? = null
