@@ -27,5 +27,8 @@ jobs:
     - name: Get the version
       id: get_version
       run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+    - name: Set Hub Token
+      env:
+        HUB_TOKEN: ${{ secrets.HUB_TOKEN }}
     - name: Release
       run: ./gradlew buildPlugin publishPlugin -DVERSION=${CIRCLE_TAG#beta-} -DCHANNELS=beta --dry-run
