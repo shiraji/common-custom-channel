@@ -62,7 +62,7 @@ val patchPluginXml: PatchPluginXmlTask by tasks
 patchPluginXml {
     changeNotes(project.file("LATEST.txt").readText())
     sinceBuild("192.5728")
-    untilBuild("193")
+    untilBuild("999")
 }
 
 val publishPlugin: PublishTask by tasks
